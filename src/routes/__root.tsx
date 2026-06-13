@@ -1,8 +1,7 @@
-import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/Header";
 import { useCartSync } from "@/hooks/useCartSync";
-import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -18,35 +17,9 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Toy Scavenger — Vintage Toys & MCM Treasures" },
-      { name: "description", content: "Hand-picked vintage toys and Mid-Century Modern finds. Beyond collecting." },
-      { property: "og:title", content: "Toy Scavenger" },
-      { property: "og:description", content: "Vintage toys & MCM treasures, scavenged with care." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "stylesheet", href: appCss }],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head><HeadContent /></head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   useCartSync();
