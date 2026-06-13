@@ -1,0 +1,128 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:wght@400;500;600;700;800&family=Special+Elite&display=swap');
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cherry: var(--cherry);
+  --color-mustard: var(--mustard);
+  --color-teal-deep: var(--teal-deep);
+  --color-cream: var(--cream);
+  --font-display: 'Bungee', system-ui, sans-serif;
+  --font-body: 'Rubik', system-ui, sans-serif;
+  --font-mono-retro: 'Special Elite', monospace;
+}
+
+:root {
+  --radius: 0.375rem;
+  /* Mid-Century Modern palette */
+  --cream: oklch(0.95 0.025 80);
+  --teal-deep: oklch(0.42 0.08 195);
+  --cherry: oklch(0.55 0.18 25);
+  --mustard: oklch(0.78 0.14 80);
+
+  --background: oklch(0.95 0.025 80);
+  --foreground: oklch(0.22 0.04 30);
+  --card: oklch(0.97 0.018 80);
+  --card-foreground: oklch(0.22 0.04 30);
+  --popover: oklch(0.97 0.018 80);
+  --popover-foreground: oklch(0.22 0.04 30);
+  --primary: oklch(0.42 0.08 195);
+  --primary-foreground: oklch(0.97 0.02 80);
+  --secondary: oklch(0.55 0.18 25);
+  --secondary-foreground: oklch(0.97 0.02 80);
+  --muted: oklch(0.9 0.022 80);
+  --muted-foreground: oklch(0.42 0.04 40);
+  --accent: oklch(0.78 0.14 80);
+  --accent-foreground: oklch(0.22 0.04 30);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.97 0.02 80);
+  --border: oklch(0.82 0.03 60);
+  --input: oklch(0.85 0.025 60);
+  --ring: oklch(0.42 0.08 195);
+  --sidebar: oklch(0.95 0.025 80);
+  --sidebar-foreground: oklch(0.22 0.04 30);
+  --sidebar-primary: oklch(0.42 0.08 195);
+  --sidebar-primary-foreground: oklch(0.97 0.02 80);
+  --sidebar-accent: oklch(0.9 0.022 80);
+  --sidebar-accent-foreground: oklch(0.22 0.04 30);
+  --sidebar-border: oklch(0.82 0.03 60);
+  --sidebar-ring: oklch(0.42 0.08 195);
+  --chart-1: oklch(0.42 0.08 195);
+  --chart-2: oklch(0.55 0.18 25);
+  --chart-3: oklch(0.78 0.14 80);
+  --chart-4: oklch(0.5 0.1 145);
+  --chart-5: oklch(0.4 0.06 30);
+}
+
+.dark {
+  --background: oklch(0.18 0.02 30);
+  --foreground: oklch(0.95 0.025 80);
+  --card: oklch(0.22 0.025 30);
+  --card-foreground: oklch(0.95 0.025 80);
+  --popover: oklch(0.22 0.025 30);
+  --popover-foreground: oklch(0.95 0.025 80);
+  --primary: oklch(0.78 0.14 80);
+  --primary-foreground: oklch(0.18 0.02 30);
+  --secondary: oklch(0.55 0.18 25);
+  --secondary-foreground: oklch(0.97 0.02 80);
+  --muted: oklch(0.28 0.025 30);
+  --muted-foreground: oklch(0.7 0.03 60);
+  --accent: oklch(0.42 0.08 195);
+  --accent-foreground: oklch(0.97 0.02 80);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.97 0.02 80);
+  --border: oklch(0.32 0.03 30);
+  --input: oklch(0.32 0.03 30);
+  --ring: oklch(0.78 0.14 80);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    background-image:
+      radial-gradient(circle at 1px 1px, oklch(0.22 0.04 30 / 0.06) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0.02em; }
+}
+
+/* Retro starburst accent */
+.starburst {
+  background: conic-gradient(from 0deg, var(--mustard) 0deg 20deg, transparent 20deg 40deg,
+    var(--mustard) 40deg 60deg, transparent 60deg 80deg, var(--mustard) 80deg 100deg,
+    transparent 100deg 120deg, var(--mustard) 120deg 140deg, transparent 140deg 160deg,
+    var(--mustard) 160deg 180deg, transparent 180deg 200deg, var(--mustard) 200deg 220deg,
+    transparent 220deg 240deg, var(--mustard) 240deg 260deg, transparent 260deg 280deg,
+    var(--mustard) 280deg 300deg, transparent 300deg 320deg, var(--mustard) 320deg 340deg,
+    transparent 340deg 360deg);
+}
