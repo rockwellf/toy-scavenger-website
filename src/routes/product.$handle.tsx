@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2, ArrowLeft, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LOCAL_PRODUCTS } from "@/data/products";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { MakeOfferDialog } from "@/components/MakeOfferDialog";
@@ -59,9 +58,14 @@ function ProductPage() {
   const isLoading = useCartStore((s) => s.isLoading);
 
   useEffect(() => {
-    const found = LOCAL_PRODUCTS.find((p) => p.node.handle === handle);
-    setProduct(found ? (found.node as unknown as ProductDetail) : null);
-    setLoading(false);
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data: Array<{ node: ProductDetail }>) => {
+        const found = data.find((p) => p.node.handle === handle);
+        setProduct(found?.node || null);
+      })
+      .catch(() => setProduct(null))
+      .finally(() => setLoading(false));
   }, [handle]);
 
   if (loading) {
