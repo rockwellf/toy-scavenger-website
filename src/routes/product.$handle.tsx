@@ -1,8 +1,8 @@
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2, ArrowLeft, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { storefrontApiRequest, PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
+import { LOCAL_PRODUCTS } from "@/data/products";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { MakeOfferDialog } from "@/components/MakeOfferDialog";
@@ -15,15 +15,12 @@ export const Route = createFileRoute("/product/$handle")({
       { name: "description", content: "Vintage find from Toy Scavenger." },
     ],
   }),
-  errorComponent: ({ error, reset }) => {
-    const router = useRouter();
-    return (
-      <div className="container mx-auto px-4 py-20 text-center">
-        <p className="text-cherry mb-4">{error.message}</p>
-        <button onClick={() => { router.invalidate(); reset(); }} className="font-display underline">Retry</button>
-      </div>
-    );
-  },
+  errorComponent: ({ error }) => (
+    <div className="container mx-auto px-4 py-20 text-center">
+      <p className="text-cherry mb-4">{error.message}</p>
+      <Link to="/" className="font-display underline">Back to shop</Link>
+    </div>
+  ),
   notFoundComponent: () => (
     <div className="container mx-auto px-4 py-20 text-center">
       <h1 className="font-display text-3xl mb-2">Treasure not found</h1>
@@ -62,9 +59,9 @@ function ProductPage() {
   const isLoading = useCartStore((s) => s.isLoading);
 
   useEffect(() => {
-    storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle })
-      .then((data) => setProduct(data?.data?.product || null))
-      .finally(() => setLoading(false));
+    const found = LOCAL_PRODUCTS.find((p) => p.node.handle === handle);
+    setProduct(found ? (found.node as unknown as ProductDetail) : null);
+    setLoading(false);
   }, [handle]);
 
   if (loading) {

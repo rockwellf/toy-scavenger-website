@@ -33,7 +33,7 @@ interface Props {
 }
 
 // Where offers should be sent. Update to the shop owner's email.
-const OFFER_RECIPIENT = "offers@toyscavenger.com";
+const OFFER_RECIPIENT = "rockwellf@gmail.com";
 
 export function MakeOfferDialog({ productTitle, productHandle, listPrice, currencyCode }: Props) {
   const [open, setOpen] = useState(false);
