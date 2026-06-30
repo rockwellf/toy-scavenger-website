@@ -108,9 +108,9 @@ function ProductPage() {
       </Link>
       <div className="grid md:grid-cols-2 gap-10">
         <div>
-          <div className="aspect-square bg-card border-2 border-foreground rounded-md overflow-hidden mb-3">
+          <div className="bg-card border-2 border-foreground rounded-md overflow-hidden mb-3 flex items-center justify-center min-h-[400px] max-h-[650px]">
             {images[selectedImage] ? (
-              <img src={images[selectedImage].node.url} alt={images[selectedImage].node.altText || product.title} className="w-full h-full object-cover" />
+              <img src={images[selectedImage].node.url} alt={images[selectedImage].node.altText || product.title} className="w-full h-full object-contain" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-muted-foreground">No image</div>
             )}
